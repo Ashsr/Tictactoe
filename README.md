@@ -1,2 +1,2 @@
 # Tictactoe
-A 3 x 3 Tic Tac Toe game in C++
+A 2 player 3 x 3 Tic Tac Toe game in C++
