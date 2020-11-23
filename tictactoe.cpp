@@ -3,32 +3,32 @@
 using namespace std;
 #include <vector>
 
-#define length 3
-int moves = 0;
-char board [length][length];
-vector<int> pos(int resp);
+#define length 3 // Board size
+int moves = 0; // Keep track of moves  count
+char board [length][length]; // Board
+vector<int> pos(int resp); // Get 2D position on board based on user input
 
-void display(int resp, int p);
-bool checkwin();
+void display(int resp, int p); // Display the board
+bool checkwin(); // Check for victory
 
 int main()
 {
-    display(-1, 0);
-    int player = 0, resp = -1;
-    bool gamewin = false;
+    display(-1, 0); // Initial display of numbers for position
+    int player = 0, resp = -1; // Initialise the variables
+    bool gamewin = false; 
 
-    while (!gamewin && (moves != length*length))
+    while (!gamewin && (moves != length*length)) // While the game is not won and there are moves available to make
     {
-        player = (player == 1) ? 2:1;
+        player = (player == 1) ? 2:1; // Which players turn
         cout << "Player"<<player<<"'s turn: ";
-        cin >> resp;
+        cin >> resp; // Get user input
         display(resp, player);
-        gamewin = checkwin();
-        moves ++;
+        gamewin = checkwin(); // Check for victory
+        moves ++; // Update move numbers
     }
     if (moves != length*length)
     {
-        cout<<"Player "<<player<<" wins the game.\n";
+        cout<<"Player "<<player<<" wins the game.\n"; 
     }
     else
     {
@@ -38,7 +38,7 @@ int main()
 
 void display(int resp, int p)
 {
-    if (resp == -1)
+    if (resp == -1) // Initial call
     {
         cout<< " Welcome! Let's play tic tac toe. Here are the numbers assigned for each position.\n";
            cout<<"\n";
@@ -56,29 +56,30 @@ void display(int resp, int p)
     }
     else
     {
-        int x,y, posf = 0;
+        int x,y, posf = 0; 
         do{
-            x = pos(resp)[0];
+            x = pos(resp)[0]; // Get position
             y = pos(resp)[1];
             if ( (x==y && y == -1)|| board[x][y] != ' ')
             {
-                posf = 1; // Validity of position
+                posf = 1; // Invalid position
                 cout<< " Invalid move. Enter position again: ";
                 cin >> resp;
             }
             else
             {
-                posf = 0;
+                posf = 0; // Valid position
             }
-        }while(posf == 1);
+        }while(posf == 1); // Do while position is invalid
         if (p == 1)
         {
-            board[x][y] = 'X';
+            board[x][y] = 'X'; // Player 1 - X
         }
         else
         {
-            board[x][y] = 'O';
+            board[x][y] = 'O'; // Player 2 - O
         }
+        // Display current game status to players
         cout << "Move number: "<<moves;
         cout<<"\n";
         cout<<" ___  ___  ___ \n";
@@ -130,7 +131,7 @@ bool checkwin()
     return false;
 }
 
-vector<int> pos(int resp)
+vector<int> pos(int resp) // Convert user input to 2D position in the board
 {
     vector<int> ans;
     if (resp >= 0 && resp < 3)
